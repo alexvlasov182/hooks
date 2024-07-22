@@ -1,39 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
 
+const MyContext = React.createContext<string | undefined>(undefined);
+
 const App = () => {
-  return (
-    <div>
-      <HookSwitcher />
-    </div>
-  );
-};
-
-const HookSwitcher = () => {
-  const [color, setColor] = useState("black");
-
-  return (
-    <div style={{ padding: "10px", backgroundColor: color }}>
-      <button
-        onClick={() => {
-          setColor("black");
-        }}
-      >
-        Dark
-      </button>
-      <button
-        onClick={() => {
-          setColor("white");
-        }}
-      >
-        Light
-      </button>
-    </div>
-  );
+  const value = useContext(MyContext);
+  if (value === undefined) {
+    return <p>No context value provided</p>;
+  }
+  return <p>{value}</p>;
 };
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(<App />);
-console.log("Hello TypeScript &&");
+root.render(
+  <MyContext.Provider value="Hello Hooks">
+    <App />
+  </MyContext.Provider>
+);
+console.log("Hello TypeScript && Hooks");
