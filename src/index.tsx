@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
+import Application from "./use-effect";
 
 const MyContext = React.createContext<string | undefined>(undefined);
 
@@ -17,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <MyContext.Provider value="Hello Hooks">
     <App />
+    <Application />
   </MyContext.Provider>
 );
 console.log("Hello TypeScript && Hooks");
